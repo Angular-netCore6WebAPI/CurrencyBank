@@ -17,13 +17,13 @@ namespace CurrencyBank.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] string UserName, [FromBody]string Password)
+        public async Task<IActionResult> Login([FromBody] User userObj)
         {
-            if (UserName == null || Password == null)
+            if (userObj == null)
             {
                 return BadRequest();
             }
-            var user = await _AuthContext.Users.FirstOrDefaultAsync(u=>u.UserName==UserName && u.Password==Password);
+            var user = await _AuthContext.Users.FirstOrDefaultAsync(u=>u.UserName == userObj.UserName && u.Password == userObj.Password);
             if (user == null)
             {
                 return NotFound(new { Message = "User Not Found"});

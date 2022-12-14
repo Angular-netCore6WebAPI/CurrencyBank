@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit{
 
-  type: string = "password";
+  type: string = "Password";
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      Username: ['', Validators.required],
+      UserName: ['', Validators.required],
       Password: ['', Validators.required]
     });
     
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
   hideShowPass(){
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
-    this.isText ? this.type = "text" : this.type = "password";
+    this.isText ? this.type = "text" : this.type = "Password";
   }
 
   onLogin(){

@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent implements OnInit{
 
-  type: string = "password";
+  type: string = "Password";
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
 
@@ -20,8 +20,8 @@ export class SignupComponent implements OnInit{
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
-      Name:['', Validators.required],
-      Surname:['', Validators.required],
+      FirstName:['', Validators.required],
+      Lastname:['', Validators.required],
       UserName:['', Validators.required],
       Email:['', Validators.required],
       Password:['', Validators.required]
@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit{
   hideShowPass(){
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
-    this.isText ? this.type = "text" : this.type = "password";
+    this.isText ? this.type = "text" : this.type = "Password";
   }
 
   onSignup(){
