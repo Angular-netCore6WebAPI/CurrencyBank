@@ -41,6 +41,10 @@ namespace CurrencyBank.Controllers
             {
                 return BadRequest();
             }
+
+            userObj.Role = "User";
+            userObj.Balance = 1000;
+
             await _AuthContext.AddAsync(userObj);
             await _AuthContext.SaveChangesAsync();
 

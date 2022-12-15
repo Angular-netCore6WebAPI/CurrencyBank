@@ -25,7 +25,6 @@ a:hover{
     border-radius: 15px;
 }
 .panel{
-    min-height: 380px;
     box-shadow: 20px 20px 80px rgb(218,218,218);
     border-radius: 12px;
     margin-top: 100px;
@@ -39,7 +38,7 @@ a:hover{
     border: 1px solid #ddd;
     color: #4343ff;
 }
-.input-field-error{
+.input-field.error{
     border: 1px solid red;
     color: red;
 }
@@ -50,7 +49,7 @@ input[type='password']{
     box-shadow: none;
     width: 100%;
 }
-.fa-eye-slash.btn{
+.fa-eye-slash-btn{
     border: none;
     outline: none;
     box-shadow: none;
