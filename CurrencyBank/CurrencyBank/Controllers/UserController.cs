@@ -42,6 +42,8 @@ namespace CurrencyBank.Controllers
                 return BadRequest();
             }
 
+            userObj.Address = "";
+            userObj.PhoneNumber = "";
             userObj.Role = "User";
             userObj.Balance = 1000;
 
