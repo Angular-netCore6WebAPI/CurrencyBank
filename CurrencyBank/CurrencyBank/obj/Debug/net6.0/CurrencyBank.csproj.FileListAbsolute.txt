@@ -176,3 +176,6 @@ D:\GitHub\CurrencyBank\CurrencyBank\CurrencyBank\obj\Debug\net6.0\CurrencyBank.g
 D:\GitHub\CurrencyBank\CurrencyBank\CurrencyBank\obj\Debug\net6.0\ref\CurrencyBank.dll
 D:\GitHub\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\libman.json
 C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\libman.json
+C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\MailKit.dll
+C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\MimeKit.dll
+C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\BouncyCastle.Crypto.dll
