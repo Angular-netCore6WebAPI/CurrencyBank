@@ -179,3 +179,6 @@ C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\De
 C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\MailKit.dll
 C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\MimeKit.dll
 C:\Users\marsl\OneDrive\Masaüstü\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\GitHub\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\MailKit.dll
+D:\GitHub\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\MimeKit.dll
+D:\GitHub\CurrencyBank\CurrencyBank\CurrencyBank\bin\Debug\net6.0\BouncyCastle.Crypto.dll

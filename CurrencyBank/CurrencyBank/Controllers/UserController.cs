@@ -69,21 +69,21 @@ namespace CurrencyBank.Controllers
         }
 
         [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword([FromBody] string Email)
+        public async Task<IActionResult> ForgotPassword([FromBody] User userObj)
         {
-            if (Email == null)
+            if (userObj.Email == null)
             {
                 return BadRequest();
             }
             
-            var User = _AuthContext.Users.FirstOrDefault(u=>u.Email == Email);
+            var User = _AuthContext.Users.FirstOrDefault(u=>u.Email == userObj.Email);
             if (User == null)
             {
                 return NotFound();
             }
             
             User.Password = CreatePassword();   
-            SendMail.Send(User.FirstName, Email, User.Password);
+            SendMail.Send(User.FirstName, userObj.Email, User.Password);
             await _AuthContext.SaveChangesAsync();
 
             return Ok(new

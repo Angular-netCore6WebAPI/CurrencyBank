@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import ValidateForm from 'src/app/helpers/validateform';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,7 +14,12 @@ export class ForgotPasswordComponent implements OnInit{
 
   forgotPasswordForm!: FormGroup;
 
-  constructor(private fb : FormBuilder, private auth : AuthService, private router : Router){}
+  constructor(
+    private fb : FormBuilder, 
+    private auth : AuthService, 
+    private router : Router,
+    private toastr : ToastrService
+    ){}
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.fb.group({
@@ -22,27 +28,27 @@ export class ForgotPasswordComponent implements OnInit{
   }
 
   onSubmit(){
-    this.router.navigate(['login']);
-    /*if(this.forgotPasswordForm.valid){
+    if(this.forgotPasswordForm.valid){
       console.log(this.forgotPasswordForm.value);
 
       this.auth.forgotPassword(this.forgotPasswordForm.value)
       .subscribe({
         next:(res)=>{
-          alert(res.message)
+          this.toastr.success(res.message, 'SUCCESS');
           this.forgotPasswordForm.reset();
-          //this.router.navigate(['login']);
+          this.router.navigate(['login']);
         },
         error:(err)=>{
+          this.toastr.warning('Something when wrong!', 'WARNING')
           alert(err?.error.message)
         }
       })
 
     }else{
+      this.toastr.error('Something when wrong!', 'ERROR')
       console.log("Form is not valid");
       ValidateForm.validateAllFormFields(this.forgotPasswordForm);
-      alert("Your form is invalid");
-    }*/
+    }
   }
   
 }

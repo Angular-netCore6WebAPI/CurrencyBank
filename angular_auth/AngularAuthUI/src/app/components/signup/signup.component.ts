@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import ValidateForm from 'src/app/helpers/validateform';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,7 +16,12 @@ export class SignupComponent implements OnInit{
   eyeIcon: string = "fa-eye-slash";
   signUpForm!: FormGroup;
 
-  constructor(private fb : FormBuilder, private auth : AuthService, private router : Router){}
+  constructor(
+    private fb : FormBuilder, 
+    private auth : AuthService, 
+    private router : Router,
+    private toastr : ToastrService
+    ){}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -23,12 +29,10 @@ export class SignupComponent implements OnInit{
       password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required],
-      address: ['', Validators.required],
-      phoneNumber: ['', Validators.required]      
+      email: ['', Validators.required,Validators.email]
     })
   }
-
+  
   hideShowPass(){
     this.istext = !this.istext;
     this.istext ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
@@ -42,20 +46,21 @@ export class SignupComponent implements OnInit{
       this.auth.signUp(this.signUpForm.value)
       .subscribe({
         next:(res)=>{
-          alert(res.message)
+          this.toastr.success(res.message, 'SUCCESS');
           this.signUpForm.reset();
           this.router.navigate(['login']);
         },
         error:(err)=>{
-          alert(err?.error.message)
+          this.toastr.warning('Something when wrong!', 'WARNING')
+          console.log(err);
         }
       })
 
     }else{
+      this.toastr.error('Something when wrong!', 'ERROR')
       console.log("Form is not valid");
       //Logic for throwing error
       ValidateForm.validateAllFormFields(this.signUpForm);
-      alert("Your form is invalid");
     }
   }
 }
