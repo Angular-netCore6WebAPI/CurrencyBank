@@ -18,7 +18,7 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}Login`,loginObj);
   }
 
-  forgotPassword(forgotObj : any){
+  forgotPassword(forgotObj? : any){
     return this.http.post<any>(`${this.baseUrl}ForgotPassword`,forgotObj);
   }
 }

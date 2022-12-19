@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit{
       password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required,Validators.email]
+      email: ['', Validators.required]
     })
   }
   
@@ -40,6 +40,7 @@ export class SignupComponent implements OnInit{
   }
 
   onSignUp(){
+    console.log(this.signUpForm.value);
     if(this.signUpForm.valid){
       console.log(this.signUpForm.value);
       //Perform logic for signup
