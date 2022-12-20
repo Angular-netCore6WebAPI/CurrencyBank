@@ -23,9 +23,7 @@ namespace CurrencyBank.Helpers
             string Chars = "abcçdefgğhıijklmnoöprsştuüvyz";
             string specialcharacters = "@$!%&?";
 
-            return "" + numbers[randomnumber] + Chars[randomchars] + specialcharacters[randomspecialcharacters] +
-                   numbers[randomnumber2] + Chars[randomchars2] + specialcharacters[randomspecialcharacters2] +
-                   numbers[randomnumber3] + Chars[randomchars3] + specialcharacters[randomspecialcharacters3];
+            return $"{numbers[randomnumber]}{Chars[randomchars]}{specialcharacters[randomspecialcharacters]}{numbers[randomnumber2]}{Chars[randomchars2]}{specialcharacters[randomspecialcharacters2]}{numbers[randomnumber3]}{Chars[randomchars3]}{specialcharacters[randomspecialcharacters3]}";
         }
     }
 }

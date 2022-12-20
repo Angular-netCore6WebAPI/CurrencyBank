@@ -46,7 +46,16 @@ export class LoginComponent implements OnInit{
         next:(res)=>{
           this.toastr.success(res.message, 'SUCCESS');
           this.loginForm.reset();
-          this.router.navigate(['home']);
+          console.log(res);
+          if(res.text == 'User')
+          {
+            this.router.navigate(['home']);
+          }
+          else
+          {
+            this.router.navigate(['admin']);
+          }
+          
         },
         error:(err)=>{
           this.toastr.warning(err.error.message, 'WARNING')

@@ -11,7 +11,7 @@ using CurrencyBank.Helpers;
 
 namespace CurrencyBank.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -33,9 +33,10 @@ namespace CurrencyBank.Controllers
             {
                 return NotFound(new { Message = "User Not Found"});
             }
-            return Ok(new
-            {
-                Message = "Login Success"
+
+            return Ok(new {
+                Message = $"Welcome {user.UserName}",
+                Text = user.Role                
             });
         }
 
@@ -47,7 +48,7 @@ namespace CurrencyBank.Controllers
                 return BadRequest();
             }
 
-            var User = _AuthContext.Users.SingleOrDefault(u=>u.UserName==userObj.UserName);
+            var User = await _AuthContext.Users.SingleOrDefaultAsync(u=>u.UserName==userObj.UserName);
 
             if (User != null)
             {
@@ -79,7 +80,7 @@ namespace CurrencyBank.Controllers
                 return BadRequest();
             }
             
-            var User = _AuthContext.Users.FirstOrDefault(u=>u.Email == userObj.Email);
+            var User = await _AuthContext.Users.FirstOrDefaultAsync(u=>u.Email == userObj.Email);
             if (User == null)
             {
                 return NotFound();
