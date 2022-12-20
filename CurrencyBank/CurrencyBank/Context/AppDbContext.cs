@@ -11,10 +11,14 @@ namespace CurrencyBank.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<UserCurrency> UsersCurrencies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<Currency>().ToTable("currencies");
+            modelBuilder.Entity<UserCurrency>().ToTable("userscurrencies");
         }
     }
 }
