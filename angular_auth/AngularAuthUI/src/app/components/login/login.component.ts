@@ -49,12 +49,12 @@ export class LoginComponent implements OnInit{
           this.router.navigate(['home']);
         },
         error:(err)=>{
-          this.toastr.warning('Something when wrong!', 'WARNING')
+          this.toastr.warning(err.error.message, 'WARNING')
           console.log(err);
-        }
+        }        
       })
     }else{
-      this.toastr.error('Something when wrong!', 'ERROR')
+      this.toastr.error('Form is not valid!', 'ERROR')
       console.log("Form is not valid");
       //throw the error using toaster and with required fields
       ValidateForm.validateAllFormFields(this.loginForm);

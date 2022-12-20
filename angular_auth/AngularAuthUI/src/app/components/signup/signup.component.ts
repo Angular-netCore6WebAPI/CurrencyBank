@@ -52,13 +52,13 @@ export class SignupComponent implements OnInit{
           this.router.navigate(['login']);
         },
         error:(err)=>{
-          this.toastr.warning('Something when wrong!', 'WARNING')
+          this.toastr.warning(err.error.message, 'WARNING')
           console.log(err);
         }
       })
 
     }else{
-      this.toastr.error('Something when wrong!', 'ERROR')
+      this.toastr.error('Form is not valid!', 'ERROR')
       console.log("Form is not valid");
       //Logic for throwing error
       ValidateForm.validateAllFormFields(this.signUpForm);

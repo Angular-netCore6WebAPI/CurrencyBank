@@ -39,13 +39,13 @@ export class ForgotPasswordComponent implements OnInit{
           this.router.navigate(['login']);
         },
         error:(err)=>{
-          this.toastr.warning('Something when wrong!', 'WARNING')
-          alert(err?.error.message)
+          this.toastr.warning(err.error.message, 'WARNING')
+          console.log(err);
         }
       })
 
     }else{
-      this.toastr.error('Something when wrong!', 'ERROR')
+      this.toastr.error('Form is not valid!', 'ERROR')
       console.log("Form is not valid");
       ValidateForm.validateAllFormFields(this.forgotPasswordForm);
     }

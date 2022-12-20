@@ -11,14 +11,14 @@ export class AuthService {
   constructor(private http : HttpClient) { }
 
   signUp(userObj : any){
-    return this.http.post<any>(`${this.baseUrl}Register`,userObj);
+    return this.http.post<any>(`${this.baseUrl}register`,userObj);
   }
 
   login(loginObj : any){
-    return this.http.post<any>(`${this.baseUrl}Login`,loginObj);
+    return this.http.post<any>(`${this.baseUrl}login`,loginObj);
   }
 
   forgotPassword(forgotObj? : any){
-    return this.http.post<any>(`${this.baseUrl}ForgotPassword`,forgotObj);
+    return this.http.post<any>(`${this.baseUrl}forgot-password`,forgotObj);
   }
 }

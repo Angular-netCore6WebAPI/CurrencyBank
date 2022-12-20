@@ -21,7 +21,7 @@ namespace CurrencyBank.Controllers
             _AuthContext = appDbContext;                                            
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] User userObj)
         {
             if (userObj == null)
@@ -39,7 +39,7 @@ namespace CurrencyBank.Controllers
             });
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] User userObj)
         {
             if (userObj == null)
@@ -51,7 +51,10 @@ namespace CurrencyBank.Controllers
 
             if (User != null)
             {
-                return BadRequest( new { Message = "Girilen Kullanıcı Adı Zaten Kayıtlı" });
+                return BadRequest( new 
+                { 
+                    Message = "Entered Username Already Registered" 
+                });
             }
 
             userObj.Address = "";
@@ -68,7 +71,7 @@ namespace CurrencyBank.Controllers
             });
         }
 
-        [HttpPost("ForgotPassword")]
+        [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] User userObj)
         {
             if (userObj.Email == null)

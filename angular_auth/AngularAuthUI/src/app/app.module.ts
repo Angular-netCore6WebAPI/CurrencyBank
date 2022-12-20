@@ -26,7 +26,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({timeOut:1000,progressBar:true,progressAnimation:'increasing'})
+    ToastrModule.forRoot({timeOut:2000,progressBar:true,progressAnimation:'increasing'})
   ],
   providers: [],
   bootstrap: [AppComponent]
