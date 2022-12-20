@@ -13,10 +13,10 @@ namespace CurrencyBank.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly AppDbContext _AuthContext;
-        public UserController(AppDbContext appDbContext)
+        public AuthController(AppDbContext appDbContext)
         {
             _AuthContext = appDbContext;                                            
         }
