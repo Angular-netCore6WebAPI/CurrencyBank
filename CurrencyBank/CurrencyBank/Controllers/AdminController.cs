@@ -15,24 +15,6 @@ namespace CurrencyBank.Controllers
             _AuthContext = appDbContext;
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> Admin(string userName)
-        {
-            var admin = await _AuthContext.Users.FirstOrDefaultAsync(u => u.UserName == userName);
-            if (admin == null)
-            {
-                return BadRequest(new
-                {
-                    Message = "Admin can not find!!!"
-                });
-            }
-
-            return Ok(new
-            {
-                Text = $"{admin.UserName}"
-            });
-        }
-
         [HttpPost("search-and-get-user")]
         public async Task<IActionResult> SearchandGetUser([FromBody] User userObj)
         {
@@ -41,13 +23,13 @@ namespace CurrencyBank.Controllers
             {
                 return BadRequest(new
                 {
-                    Message = "User can not find!!!"
+                    Message = $"{userObj.UserName} can not find!!!"
                 });
             }
 
             return Ok(new {
-                message = "User find",
-                Text = $"{user.FirstName} {user.LastName} {user.UserName} {user.Role}"
+                message = $"{user.Role} find",
+                Text = $"{user.FirstName},{user.LastName},{user.UserName},{user.Role}"
             });
         }
 
@@ -59,7 +41,7 @@ namespace CurrencyBank.Controllers
             {
                 return BadRequest(new
                 {
-                    Message = "User can not find!!!"
+                    Message = $"{userObj.UserName} can not find!!!"
                 });
             }
 
@@ -68,7 +50,28 @@ namespace CurrencyBank.Controllers
 
             return Ok(new
             {
-                message = "User's role changed"
+                message = $"{user.UserName}'s role is changed to {user.Role}"
+            });
+        }
+
+        [HttpPost("delete-user")]
+        public async Task<IActionResult> DeleteUser([FromBody] User userObj)
+        {
+            var user = await _AuthContext.Users.FirstOrDefaultAsync(u => u.UserName == userObj.UserName);
+            if (user == null)
+            {
+                return BadRequest(new
+                {
+                    Message = $"{userObj.UserName} can not find!!!"
+                });
+            }
+
+            _AuthContext.Users.Remove(user);
+            await _AuthContext.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = $"{userObj.UserName} succesfully deleted"
             });
         }
     }

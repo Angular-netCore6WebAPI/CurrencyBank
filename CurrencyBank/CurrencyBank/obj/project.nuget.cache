@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VpEBxd6HmiHpR1kZayrcs1WS4FzBqg3gz6V2svLNK2YI9Hle/4GTyMOWEFkrAlnmfMdTkMVZqhOfdmCWcY+pVg==",
+  "dgSpecHash": "cjbc60oinba/YlEMXhNJZV22mqbDhfwM5aWahX2nv+ccyRBupYqthGDilXPEEh/FOCNd5d/JBPJ3YjT7tqms7A==",
   "success": true,
   "projectFilePath": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,7 @@
     "C:\\Users\\marsl\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\marsl\\.nuget\\packages\\mimekit\\3.4.3\\mimekit.3.4.3.nupkg.sha512",
     "C:\\Users\\marsl\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\marsl\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
     "C:\\Users\\marsl\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\marsl\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\marsl\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
