@@ -71,7 +71,12 @@
                   <li class="input-field mt-2">
                     <span class="fa fa-user p-2"></span>
                     <label style="color: black">Role : </label>
-                    <select name="roles" id="roles" type="text">
+                    <select
+                      formControlName="role"
+                      name="roles"
+                      id="roles"
+                      type="text"
+                    >
                       <option value="User">{{ value1 }}</option>
                       <option value="Admin">{{ value2 }}</option>
                     </select>
