@@ -1,1 +1,105 @@
-<p>admin works!</p>
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h5 class="font-weight-bold" style="padding-top: 10px; margin: 0px">
+              {{ adm.userName }}
+            </h5>
+            <h3 class="font-weight-bold" style="padding-top: 10px">
+              Admin Panel
+            </h3>
+          </div>
+          <div class="panel-body p-3">
+            <form [formGroup]="adminForm">
+              <p>Enter the username of the user you want to query</p>
+
+              <div class="form-group pt-3">
+                <div
+                  class="input-field"
+                  [class.error]="
+                    adminForm.controls['username'].dirty &&
+                    adminForm.hasError('required', 'username')
+                  "
+                >
+                  <span class="fa fa-user p-2"></span>
+                  <input
+                    class="p-2"
+                    formControlName="username"
+                    type="text"
+                    placeholder="Username"
+                  />
+                  <button
+                    (click)="search()"
+                    type="submit"
+                    class="btn btn-primary m-0"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+              <small
+                *ngIf="
+                  adminForm.controls['username'].dirty &&
+                  adminForm.hasError('required', 'username')
+                "
+                class="text-danger"
+                >*Username is required
+              </small>
+
+              <div class="form-group pt-3">
+                <ul>
+                  <li class="input-field mt-2">
+                    <span class="fa fa-user p-2"></span
+                    ><label style="color: black"
+                      >Firstname : {{ user.firstName }}</label
+                    >
+                  </li>
+                  <li class="input-field mt-2">
+                    <span class="fa fa-user p-2"></span
+                    ><label style="color: black"
+                      >Lastname : {{ user.lastName }}</label
+                    >
+                  </li>
+                  <li class="input-field mt-2">
+                    <span class="fa fa-user p-2"></span
+                    ><label style="color: black"
+                      >Username : {{ user.userName }}</label
+                    >
+                  </li>
+                  <li class="input-field mt-2">
+                    <span class="fa fa-user p-2"></span>
+                    <label style="color: black">Role : </label>
+                    <select name="roles" id="roles" type="text">
+                      <option value="User">{{ value1 }}</option>
+                      <option value="Admin">{{ value2 }}</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <button
+                  (click)="changeRole()"
+                  type="submit"
+                  class="btn btn-success btn-block mt-4 w-50"
+                >
+                  Update
+                </button>
+
+                <button
+                  (click)="deleteUser()"
+                  type="submit"
+                  class="btn btn-danger btn-block mt-4 w-50"
+                >
+                  Delete
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

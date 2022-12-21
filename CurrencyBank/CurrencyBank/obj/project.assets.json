@@ -4199,19 +4199,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marsl\\.nuget\\packages\\": {}
+    "C:\\Users\\sekov\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
+      "projectUniqueName": "D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
       "projectName": "CurrencyBank",
-      "projectPath": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
-      "packagesPath": "C:\\Users\\marsl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\obj\\",
+      "projectPath": "D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
+      "packagesPath": "C:\\Users\\sekov\\.nuget\\packages\\",
+      "outputPath": "D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\marsl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sekov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

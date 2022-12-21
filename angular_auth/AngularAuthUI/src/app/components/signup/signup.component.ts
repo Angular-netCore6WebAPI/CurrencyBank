@@ -8,20 +8,20 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnInit{
-  type: string = "password";
+export class SignupComponent implements OnInit {
+  type: string = 'password';
   istext: boolean = false;
-  eyeIcon: string = "fa-eye-slash";
+  eyeIcon: string = 'fa-eye-slash';
   signUpForm!: FormGroup;
 
   constructor(
-    private fb : FormBuilder, 
-    private auth : AuthService, 
-    private router : Router,
-    private toastr : ToastrService
-    ){}
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -29,37 +29,34 @@ export class SignupComponent implements OnInit{
       password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required]
-    })
-  }
-  
-  hideShowPass(){
-    this.istext = !this.istext;
-    this.istext ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
-    this.istext ? this.type = "text" : this.type = "password";
+      email: ['', Validators.email],
+    });
   }
 
-  onSignUp(){
+  hideShowPass() {
+    this.istext = !this.istext;
+    this.istext ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
+    this.istext ? (this.type = 'text') : (this.type = 'password');
+  }
+
+  onSignUp() {
     console.log(this.signUpForm.value);
-    if(this.signUpForm.valid){
+    if (this.signUpForm.valid) {
       console.log(this.signUpForm.value);
       //Perform logic for signup
-      this.auth.signUp(this.signUpForm.value)
-      .subscribe({
-        next:(res)=>{
+      this.auth.signUp(this.signUpForm.value).subscribe({
+        next: (res) => {
           this.toastr.success(res.message, 'SUCCESS');
-          this.signUpForm.reset();
           this.router.navigate(['login']);
         },
-        error:(err)=>{
-          this.toastr.warning(err.error.message, 'WARNING')
+        error: (err) => {
+          this.toastr.warning(err.error.message, 'WARNING');
           console.log(err);
-        }
-      })
-
-    }else{
-      this.toastr.error('Form is not valid!', 'ERROR')
-      console.log("Form is not valid");
+        },
+      });
+    } else {
+      this.toastr.error('Form is not valid!', 'ERROR');
+      console.log('Form is not valid');
       //Logic for throwing error
       ValidateForm.validateAllFormFields(this.signUpForm);
     }
