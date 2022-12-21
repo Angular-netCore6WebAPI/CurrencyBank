@@ -3,6 +3,7 @@ using CurrencyBank.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 using System.Net;
 
 namespace CurrencyBank.Helpers
@@ -42,24 +43,24 @@ namespace CurrencyBank.Helpers
         {
             var Dbcurrency = await appDbContext.Currencies.FirstOrDefaultAsync(c => c.Name == currency.CurrencyName);
 
-            var buying=Convert.ToDouble(currency.ForexBuying);
-            var selling=Convert.ToDouble(currency.ForexSelling);
+            var buying=double.Parse(currency.ForexBuying, CultureInfo.InvariantCulture);
+            var selling= double.Parse(currency.ForexSelling, CultureInfo.InvariantCulture);
+
             if (Dbcurrency == null)
             {
                 await appDbContext.Currencies.AddAsync(new Currency
                 {
                     Name = currency.CurrencyName,
-                    Purchase = buying/10000,
-                    Sale = selling/10000
+                    Purchase = buying,
+                    Sale = selling
                 });
-                await appDbContext.SaveChangesAsync();
             }
             else
             {
-                Dbcurrency.Purchase = buying/10000;
-                Dbcurrency.Sale = selling / 10000;
-                await appDbContext.SaveChangesAsync();
+                Dbcurrency.Purchase = buying;
+                Dbcurrency.Sale = selling;                  
             }
+            await appDbContext.SaveChangesAsync();
         }
     }
 }

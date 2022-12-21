@@ -4199,24 +4199,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sekov\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\marsl\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
+      "projectUniqueName": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
       "projectName": "CurrencyBank",
-      "projectPath": "D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
-      "packagesPath": "C:\\Users\\sekov\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\obj\\",
+      "projectPath": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\CurrencyBank.csproj",
+      "packagesPath": "C:\\Users\\marsl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\marsl\\OneDrive\\Masaüstü\\CurrencyBank\\CurrencyBank\\CurrencyBank\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\sekov\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\marsl\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4295,13 +4290,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Önbellek dosyası D:\\GitHub\\CurrencyBank\\CurrencyBank\\CurrencyBank\\obj\\project.nuget.cache okunurken bir sorun oluştu : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
