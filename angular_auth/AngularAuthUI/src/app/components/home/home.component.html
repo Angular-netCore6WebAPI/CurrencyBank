@@ -1,1 +1,162 @@
-<p>home works!</p>
+<div class="outer">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" style="padding-left: 40px; color: white"
+        >Currency Bank</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              style="padding-left: 40px; color: white"
+              href="/home"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              style="padding-left: 40px; color: white"
+              href="/home"
+              >About Us</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              style="padding-left: 40px; color: white"
+              href="/login"
+              >Exit</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="leftColumn">
+    <div class="outermostBox">
+      <div class="balance">
+        <h4>Balance</h4>
+        <p>1000₺</p>
+      </div>
+      <div class="balance mt-4">
+        <ul class="list-group">
+          <li (click)="showMoneyType('US DOLLAR')" class="list-group-item">
+            US DOLLAR
+          </li>
+          <li (click)="showMoneyType('EURO')" class="list-group-item">EURO</li>
+          <li (click)="showMoneyType('POUND STERLING')" class="list-group-item">
+            POUND STERLING
+          </li>
+          <li (click)="showMoneyType('SWISS FRANK')" class="list-group-item">
+            SWISS FRANK
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="rightColumn">
+    <div class="outermostBox">
+      <div>
+        <div class="balance">
+          <h5>Date</h5>
+          <h6>{{ date }}</h6>
+        </div>
+
+        <div class="column">
+          <h2>Buy</h2>
+          <p>{{ currency.name }} = ₺{{ currency.purchase }}</p>
+          <form [formGroup]="homeBuyForm">
+            <div class="form-group pt-3">
+              <div
+                class="input-field"
+                [class.error]="
+                  homeBuyForm.controls['buyPrice'].dirty &&
+                  homeBuyForm.hasError('required', 'buyPrice')
+                "
+              >
+                <input
+                  id="buyPrice"
+                  class="input m-3 p-2"
+                  formControlName="buyPrice"
+                  type="number"
+                  placeholder="Purchase"
+                />
+              </div>
+              <small
+                *ngIf="
+                  homeBuyForm.controls['buyPrice'].dirty &&
+                  homeBuyForm.hasError('required', 'buyPrice')
+                "
+                class="text-danger"
+                >*Price is required
+              </small>
+            </div>
+
+            <button
+              (click)="buy()"
+              type="submit"
+              class="btn btn-primary btn-block mb-4 w-50"
+            >
+              Buy
+            </button>
+
+            <p>You have 100 US DOLLAR in your account.</p>
+          </form>
+        </div>
+
+        <div class="column">
+          <h2>Sell</h2>
+          <p>{{ currency.name }} = ₺{{ currency.purchase }}</p>
+          <form [formGroup]="homeSellForm">
+            <div class="form-group pt-3">
+              <div
+                class="input-field"
+                [class.error]="
+                  homeSellForm.controls['sellPrice'].dirty &&
+                  homeSellForm.hasError('required', 'sellPrice')
+                "
+              >
+                <input
+                  id="sellPrice"
+                  class="input m-3 p-2"
+                  formControlName="sellPrice"
+                  type="number"
+                  placeholder="Sale"
+                />
+              </div>
+              <small
+                *ngIf="
+                  homeSellForm.controls['sellPrice'].dirty &&
+                  homeSellForm.hasError('required', 'sellPrice')
+                "
+                class="text-danger"
+                >*Price is required
+              </small>
+            </div>
+            <button
+              (click)="sell()"
+              type="submit"
+              class="btn btn-primary btn-block mb-4 w-50"
+            >
+              Sell
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

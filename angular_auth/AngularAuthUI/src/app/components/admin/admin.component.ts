@@ -77,7 +77,11 @@ export class AdminComponent implements OnInit {
   changeRole() {
     if (this.adminForm.valid) {
       //Send the obj to database
-      this.admin.changeRole(this.adminForm.value).subscribe({
+      this.user.userName = this.adminForm.value.username;
+      this.user.role = (<HTMLSelectElement>(
+        document.getElementById('roles')
+      )).value;
+      this.admin.changeRole(this.user).subscribe({
         next: (res) => {
           this.toastr.success(res.message, 'SUCCESS');
         },
