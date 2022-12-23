@@ -36,16 +36,20 @@ namespace CurrencyBank.Controllers
                 return NotFound();
             }
 
+            var sumDollar = MoneyControl.ReturnMoney(_HomeContext,User.UserName, dollar.Name);
+
             return Ok(new
             {
-                Text = $"{dollar.Purchase},{dollar.Sale},{User.Id},{User.Balance}"
+                Text = $"{dollar.Purchase},{dollar.Sale},{User.Balance},{sumDollar}"
             });
         }
 
         [HttpPost("get-currency")]
-        public async Task<IActionResult> ReturnCurrencyWithName([FromBody] Currency Currency)
+        public async Task<IActionResult> ReturnCurrencyWithName([FromBody] UserCurrency UserCurrency)
         {
-            var currency = await _HomeContext.Currencies.FirstOrDefaultAsync(c => c.Name == Currency.Name);
+            double sumCurrency = MoneyControl.ReturnMoney(_HomeContext, UserCurrency.UserName, UserCurrency.CurrencyName);
+
+            var currency = await _HomeContext.Currencies.FirstOrDefaultAsync(c => c.Name == UserCurrency.CurrencyName);
             if (currency == null)
             {
                 return NotFound();
@@ -53,7 +57,7 @@ namespace CurrencyBank.Controllers
 
             return Ok(new
             {
-                Text = $"{currency.Purchase} {currency.Sale}"
+                Text = $"{currency.Purchase},{currency.Sale},{sumCurrency}"
             });
         }
 
@@ -95,33 +99,19 @@ namespace CurrencyBank.Controllers
             });           
             await _HomeContext.SaveChangesAsync();
 
+            double sumCurrency = MoneyControl.ReturnMoney(_HomeContext, UserCurrency.UserName, UserCurrency.CurrencyName);
+
             return Ok(new
             {
                 message = $"You get {UserCurrency.Amount} {UserCurrency.CurrencyName}\n Your new balance is {user.Balance}",
-                text= $"{UserCurrency.Amount},{UserCurrency.CurrencyName},{user.Balance}"
+                text= $"{UserCurrency.Amount},{UserCurrency.CurrencyName},{user.Balance},{sumCurrency}"
             });
         }
 
         [HttpPost("sale")]
         public async Task<IActionResult> SaleCurrency([FromBody] UserCurrency UserCurrency)
         {
-            double sumCurrency=0;
-            var userCurrency = await _HomeContext.UsersCurrencies.Where(uc=>uc.UserName==UserCurrency.UserName && uc.CurrencyName==UserCurrency.CurrencyName).ToListAsync();
-            if (userCurrency == null)
-            {
-                return NotFound();
-            }
-            userCurrency.ForEach(uc =>
-            {
-                if (uc.Type=="Purchase")
-                {
-                    sumCurrency += uc.Amount;
-                }
-                else
-                {
-                    sumCurrency -= uc.Amount;
-                }                  
-            });
+            double sumCurrency= MoneyControl.ReturnMoney(_HomeContext, UserCurrency.UserName, UserCurrency.CurrencyName);
             if (sumCurrency < UserCurrency.Amount)
             {
                 return BadRequest(new
@@ -149,10 +139,11 @@ namespace CurrencyBank.Controllers
             });
             await _HomeContext.SaveChangesAsync();
 
+            double sumCurrencyAfter = MoneyControl.ReturnMoney(_HomeContext, UserCurrency.UserName, UserCurrency.CurrencyName);
             return Ok(new
             {
                 message = $"You sale {UserCurrency.Amount} {UserCurrency.CurrencyName}\n Your new balance is {user.Balance}",
-                text = $"{UserCurrency.Amount},{UserCurrency.CurrencyName},{user.Balance}"
+                text = $"{UserCurrency.Amount},{UserCurrency.CurrencyName},{user.Balance},{sumCurrencyAfter}"
             });
         }
     }
