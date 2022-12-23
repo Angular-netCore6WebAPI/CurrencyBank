@@ -64,11 +64,11 @@ export class LoginComponent implements OnInit {
   userControl(role: string, message: string) {
     this.user.userName = this.loginForm.value.username;
     this.user.password = this.loginForm.value.password;
+    this.shared.set(this.user);
     if (role == 'User') {
       this.toastr.success(message, 'SUCCESS');
       this.router.navigate(['home']);
     } else if (role == 'Admin') {
-      this.shared.set(this.user);
       this.toastr.success(message, 'SUCCESS');
       this.router.navigate(['admin']);
     } else {

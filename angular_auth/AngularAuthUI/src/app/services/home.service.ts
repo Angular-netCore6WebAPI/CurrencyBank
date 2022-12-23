@@ -6,23 +6,23 @@ import { Currencies } from '../classes/currencies';
   providedIn: 'root',
 })
 export class HomeService {
-  baseUrl: string = 'https://localhost:7164/Home/';
+  baseUrl: string = 'https://localhost:7164/Home';
 
   constructor(private http: HttpClient) {}
 
-  home() {
-    return this.http.get<any>(`${this.baseUrl}`);
+  home(userName: string) {
+    return this.http.get<any>(`${this.baseUrl}?Username=${userName}`);
   }
 
   getMoney(currency: Currencies) {
-    return this.http.post<any>(`${this.baseUrl}get-money`, currency);
+    return this.http.post<any>(`${this.baseUrl}/get-money`, currency);
   }
 
   buy(currency: Currencies) {
-    return this.http.post<any>(`${this.baseUrl}buy`, currency);
+    return this.http.post<any>(`${this.baseUrl}/buy`, currency);
   }
 
   sell(currency: Currencies) {
-    return this.http.post<any>(`${this.baseUrl}sell`, currency);
+    return this.http.post<any>(`${this.baseUrl}/sell`, currency);
   }
 }

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Currencies } from 'src/app/classes/currencies';
+import { User } from 'src/app/classes/user';
 import ValidateForm from 'src/app/helpers/validateform';
 import { HomeService } from 'src/app/services/home.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,7 @@ export class HomeComponent implements OnInit {
   date = this.today.toLocaleDateString();
 
   currency = new Currencies();
+  hm = new User();
 
   homeBuyForm!: FormGroup;
   homeSellForm!: FormGroup;
@@ -22,10 +25,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private home: HomeService,
     private toastr: ToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private shared: SharedService
   ) {}
 
   ngOnInit(): void {
+    this.hm = this.shared.get();
     this.homeBuyForm = this.fb.group({
       buyPrice: ['', Validators.min(0)],
     });
@@ -34,20 +39,19 @@ export class HomeComponent implements OnInit {
     });
 
     this.currency.name = 'US DOLLAR';
-    /*this.home.home().subscribe({
-      next: (res) => {
-        this.currency.purchase = res.message;
-      },
+    console.log(this.hm.userName);
+    this.home.home(this.hm.userName).subscribe({
+      next: (res) => {},
       error: (err) => {
         this.toastr.warning(err.error.message, 'WARNING');
         console.log(err);
       },
-    });*/
+    });
   }
 
   showMoneyType(moneyType: string) {
     this.currency.name = moneyType;
-    /*this.home.getMoney(this.currency).subscribe({
+    this.home.getMoney(this.currency).subscribe({
       next: (res) => {
         this.currency.purchase = res.text;
         this.toastr.success(res.message, 'SUCCESS');
@@ -56,21 +60,19 @@ export class HomeComponent implements OnInit {
         this.toastr.warning(err.error.message, 'WARNING');
         console.log(err);
       },
-    });*/
+    });
   }
 
   buy() {
     if (this.homeBuyForm.valid) {
       //Send the obj to database
-      /*this.home.buy(this.currency).subscribe({
-        next: (res) => {
-          
-        },
+      this.home.buy(this.currency).subscribe({
+        next: (res) => {},
         error: (err) => {
           this.toastr.warning(err.error.message, 'WARNING');
           console.log(err);
         },
-      });*/
+      });
     } else {
       this.toastr.error('Form is not valid!', 'ERROR');
       console.log('Form is not valid');
@@ -82,15 +84,13 @@ export class HomeComponent implements OnInit {
   sell() {
     if (this.homeSellForm.valid) {
       //Send the obj to database
-      /*this.home.sell(this.currency).subscribe({
-        next: (res) => {
-          
-        },
+      this.home.sell(this.currency).subscribe({
+        next: (res) => {},
         error: (err) => {
           this.toastr.warning(err.error.message, 'WARNING');
           console.log(err);
         },
-      });*/
+      });
     } else {
       this.toastr.error('Form is not valid!', 'ERROR');
       console.log('Form is not valid');
