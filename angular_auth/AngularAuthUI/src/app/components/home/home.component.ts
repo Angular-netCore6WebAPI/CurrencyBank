@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { Currencies } from 'src/app/classes/currencies';
 import { User } from 'src/app/classes/user';
 import { UserCurrency } from 'src/app/classes/user-currency';
@@ -43,13 +44,14 @@ export class HomeComponent implements OnInit {
     this.hm = this.shared.get();
 
     this.homeBuyForm = this.fb.group({
-      buyAmount: ['', Validators.min(0)],
+      buyAmount: ['', Validators.min(1)],
     });
     this.homeSellForm = this.fb.group({
-      sellAmount: ['', Validators.min(0)],
+      sellAmount: ['', Validators.min(1)],
     });
 
     this.currency.name = 'US DOLLAR';
+    this.userCurrency.currencyName = 'US DOLLAR';
     this.home.home(this.hm.userName).subscribe({
       next: (res) => {
         this.splitted(res.text);
@@ -77,6 +79,8 @@ export class HomeComponent implements OnInit {
   }
 
   showMoneyType(moneyType: string) {
+    this.homeBuyForm.reset();
+    this.homeSellForm.reset();
     this.currency.name = moneyType;
     this.userCurrency.userName = this.hm.userName;
     this.userCurrency.currencyName = moneyType;
@@ -106,6 +110,8 @@ export class HomeComponent implements OnInit {
       this.userCurrency.amount = this.homeBuyForm.value.buyAmount;
       this.userCurrency.type = 'Purchase';
 
+      console.log(this.userCurrency);
+
       this.home.purchase(this.userCurrency).subscribe({
         next: (res) => {
           this.toastr.success(res.message, 'SUCCESS');
@@ -127,8 +133,17 @@ export class HomeComponent implements OnInit {
   sale() {
     if (this.homeSellForm.valid) {
       //Send the obj to database
+      this.userCurrency.userName = this.hm.userName;
+      this.userCurrency.price = this.currency.sale;
+      this.userCurrency.amount = this.homeSellForm.value.sellAmount;
+      this.userCurrency.type = 'Sale';
+      console.log(this.userCurrency);
+
       this.home.sale(this.userCurrency).subscribe({
-        next: (res) => {},
+        next: (res) => {
+          this.toastr.success(res.message, 'SUCCESS');
+          this.purchaseSplitted(res.text);
+        },
         error: (err) => {
           this.toastr.warning(err.error.message, 'WARNING');
           console.log(err);
