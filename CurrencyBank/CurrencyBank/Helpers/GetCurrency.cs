@@ -8,7 +8,7 @@ using System.Net;
 
 namespace CurrencyBank.Helpers
 {
-    public class GetCurrencyAPI
+    public class GetCurrency
     {          
         public static CurrencyAPI GetDollar()
         {                 
@@ -43,8 +43,8 @@ namespace CurrencyBank.Helpers
         {
             var Dbcurrency = await appDbContext.Currencies.FirstOrDefaultAsync(c => c.Name == currency.CurrencyName);
 
-            var buying=double.Parse(currency.ForexBuying, CultureInfo.InvariantCulture);
-            var selling= double.Parse(currency.ForexSelling, CultureInfo.InvariantCulture);
+            var selling = double.Parse(currency.ForexBuying, CultureInfo.InvariantCulture);
+            var buying = double.Parse(currency.ForexSelling, CultureInfo.InvariantCulture);
 
             if (Dbcurrency == null)
             {
