@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Currencies } from '../classes/currencies';
+import { UserCurrency } from '../classes/user-currency';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +14,15 @@ export class HomeService {
     return this.http.get<any>(`${this.baseUrl}?Username=${userName}`);
   }
 
-  getMoney(currency: Currencies) {
-    return this.http.post<any>(`${this.baseUrl}/get-money`, currency);
+  getCurrency(userCurrency: UserCurrency) {
+    return this.http.post<any>(`${this.baseUrl}/get-currency`, userCurrency);
   }
 
-  buy(currency: Currencies) {
-    return this.http.post<any>(`${this.baseUrl}/buy`, currency);
+  purchase(userCurrency: UserCurrency) {
+    return this.http.post<any>(`${this.baseUrl}/purchase`, userCurrency);
   }
 
-  sell(currency: Currencies) {
-    return this.http.post<any>(`${this.baseUrl}/sell`, currency);
+  sale(userCurrency: UserCurrency) {
+    return this.http.post<any>(`${this.baseUrl}/sale`, userCurrency);
   }
 }

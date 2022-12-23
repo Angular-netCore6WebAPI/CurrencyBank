@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ControlContainer,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Currencies } from 'src/app/classes/currencies';
 import { User } from 'src/app/classes/user';
+import { UserCurrency } from 'src/app/classes/user-currency';
 import ValidateForm from 'src/app/helpers/validateform';
 import { HomeService } from 'src/app/services/home.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -17,10 +23,14 @@ export class HomeComponent implements OnInit {
   date = this.today.toLocaleDateString();
 
   currency = new Currencies();
+
   hm = new User();
+  userCurrency = new UserCurrency();
 
   homeBuyForm!: FormGroup;
   homeSellForm!: FormGroup;
+
+  sumMoney!: number;
 
   constructor(
     private home: HomeService,
@@ -31,45 +41,78 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.hm = this.shared.get();
+
     this.homeBuyForm = this.fb.group({
-      buyPrice: ['', Validators.min(0)],
+      buyAmount: ['', Validators.min(0)],
     });
     this.homeSellForm = this.fb.group({
-      sellPrice: ['', Validators.min(0)],
+      sellAmount: ['', Validators.min(0)],
     });
 
     this.currency.name = 'US DOLLAR';
-    console.log(this.hm.userName);
     this.home.home(this.hm.userName).subscribe({
-      next: (res) => {},
+      next: (res) => {
+        this.splitted(res.text);
+      },
       error: (err) => {
-        this.toastr.warning(err.error.message, 'WARNING');
+        this.toastr.warning("Currency info can't accessibly now.", 'WARNING');
         console.log(err);
       },
     });
+  }
+
+  splitted(text: string) {
+    var splitted = text.split(',', 4);
+    this.currency.purchase = +splitted[0];
+    this.currency.sale = +splitted[1];
+    this.hm.balance = +splitted[2];
+    this.sumMoney = +splitted[3];
+  }
+
+  userCurrenySplitted(text: string) {
+    var splitted = text.split(',', 3);
+    this.currency.purchase = +splitted[0];
+    this.currency.sale = +splitted[1];
+    this.sumMoney = +splitted[2];
   }
 
   showMoneyType(moneyType: string) {
     this.currency.name = moneyType;
-    this.home.getMoney(this.currency).subscribe({
+    this.userCurrency.userName = this.hm.userName;
+    this.userCurrency.currencyName = moneyType;
+
+    this.home.getCurrency(this.userCurrency).subscribe({
       next: (res) => {
-        this.currency.purchase = res.text;
-        this.toastr.success(res.message, 'SUCCESS');
+        this.userCurrenySplitted(res.text);
       },
       error: (err) => {
-        this.toastr.warning(err.error.message, 'WARNING');
+        this.toastr.warning("Currency info can't accessibly now.", 'WARNING');
         console.log(err);
       },
     });
   }
 
-  buy() {
+  purchaseSplitted(text: string) {
+    var splitted = text.split(',', 4);
+    this.hm.balance = +splitted[0];
+    this.sumMoney = +splitted[1];
+  }
+
+  purchase() {
     if (this.homeBuyForm.valid) {
       //Send the obj to database
-      this.home.buy(this.currency).subscribe({
-        next: (res) => {},
+      this.userCurrency.userName = this.hm.userName;
+      this.userCurrency.price = this.currency.purchase;
+      this.userCurrency.amount = this.homeBuyForm.value.buyAmount;
+      this.userCurrency.type = 'Purchase';
+
+      this.home.purchase(this.userCurrency).subscribe({
+        next: (res) => {
+          this.toastr.success(res.message, 'SUCCESS');
+          this.purchaseSplitted(res.text);
+        },
         error: (err) => {
-          this.toastr.warning(err.error.message, 'WARNING');
+          this.toastr.warning("Currency info can't accessibly now.", 'WARNING');
           console.log(err);
         },
       });
@@ -81,10 +124,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  sell() {
+  sale() {
     if (this.homeSellForm.valid) {
       //Send the obj to database
-      this.home.sell(this.currency).subscribe({
+      this.home.sale(this.userCurrency).subscribe({
         next: (res) => {},
         error: (err) => {
           this.toastr.warning(err.error.message, 'WARNING');

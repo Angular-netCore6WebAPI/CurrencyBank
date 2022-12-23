@@ -49,7 +49,7 @@
     <div class="outermostBox">
       <div class="balance">
         <h4>Balance</h4>
-        <p>1000₺</p>
+        <p>{{ hm.balance }}₺</p>
       </div>
       <div class="balance mt-4">
         <ul class="list-group">
@@ -84,22 +84,22 @@
               <div
                 class="input-field"
                 [class.error]="
-                  homeBuyForm.controls['buyPrice'].dirty &&
-                  homeBuyForm.hasError('required', 'buyPrice')
+                  homeBuyForm.controls['buyAmount'].dirty &&
+                  homeBuyForm.hasError('required', 'buyAmount')
                 "
               >
                 <input
-                  id="buyPrice"
+                  id="buyAmount"
                   class="input m-3 p-2"
-                  formControlName="buyPrice"
+                  formControlName="buyAmount"
                   type="number"
                   placeholder="Purchase"
                 />
               </div>
               <small
                 *ngIf="
-                  homeBuyForm.controls['buyPrice'].dirty &&
-                  homeBuyForm.hasError('required', 'buyPrice')
+                  homeBuyForm.controls['buyAmount'].dirty &&
+                  homeBuyForm.hasError('required', 'buyAmount')
                 "
                 class="text-danger"
                 >*Price is required
@@ -107,48 +107,48 @@
             </div>
 
             <button
-              (click)="buy()"
+              (click)="purchase()"
               type="submit"
               class="btn btn-primary btn-block mb-4 w-50"
             >
               Buy
             </button>
 
-            <p>You have 100 US DOLLAR in your account.</p>
+            <p>You have {{ sumMoney }} {{ currency.name }} in your account.</p>
           </form>
         </div>
 
         <div class="column">
           <h2>Sell</h2>
-          <p>{{ currency.name }} = ₺{{ currency.purchase }}</p>
+          <p>{{ currency.name }} = ₺{{ currency.sale }}</p>
           <form [formGroup]="homeSellForm">
             <div class="form-group pt-3">
               <div
                 class="input-field"
                 [class.error]="
-                  homeSellForm.controls['sellPrice'].dirty &&
-                  homeSellForm.hasError('required', 'sellPrice')
+                  homeSellForm.controls['sellAmount'].dirty &&
+                  homeSellForm.hasError('required', 'sellAmount')
                 "
               >
                 <input
-                  id="sellPrice"
+                  id="sellAmount"
                   class="input m-3 p-2"
-                  formControlName="sellPrice"
+                  formControlName="sellAmount"
                   type="number"
                   placeholder="Sale"
                 />
               </div>
               <small
                 *ngIf="
-                  homeSellForm.controls['sellPrice'].dirty &&
-                  homeSellForm.hasError('required', 'sellPrice')
+                  homeSellForm.controls['sellAmount'].dirty &&
+                  homeSellForm.hasError('required', 'sellAmount')
                 "
                 class="text-danger"
                 >*Price is required
               </small>
             </div>
             <button
-              (click)="sell()"
+              (click)="sale()"
               type="submit"
               class="btn btn-primary btn-block mb-4 w-50"
             >
