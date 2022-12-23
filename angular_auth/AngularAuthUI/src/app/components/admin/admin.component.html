@@ -38,15 +38,15 @@
                     Search
                   </button>
                 </div>
+                <small
+                  *ngIf="
+                    adminForm.controls['username'].dirty &&
+                    adminForm.hasError('required', 'username')
+                  "
+                  class="text-danger"
+                  >*Username is required
+                </small>
               </div>
-              <small
-                *ngIf="
-                  adminForm.controls['username'].dirty &&
-                  adminForm.hasError('required', 'username')
-                "
-                class="text-danger"
-                >*Username is required
-              </small>
 
               <div class="form-group pt-3">
                 <ul>
@@ -72,13 +72,13 @@
                     <span class="fa fa-user p-2"></span>
                     <label style="color: black">Role : </label>
                     <select
-                      formControlName="role"
+                      style="border: none; outline: none; width: 80%"
                       name="roles"
                       id="roles"
                       type="text"
                     >
-                      <option value="User">{{ value1 }}</option>
-                      <option value="Admin">{{ value2 }}</option>
+                      <option value="User" type="text">{{ value1 }}</option>
+                      <option value="Admin" type="text">{{ value2 }}</option>
                     </select>
                   </li>
                 </ul>
