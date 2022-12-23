@@ -79,6 +79,7 @@ namespace CurrencyBank.Controllers
             if (user.Balance >= (UserCurrency.Price*UserCurrency.Amount))
             {
                 user.Balance -= (UserCurrency.Price * UserCurrency.Amount);
+                user.Balance = Math.Round(user.Balance, 2);
             }
             else
             {
@@ -94,17 +95,18 @@ namespace CurrencyBank.Controllers
                 CurrencyName = currency.Name,
                 Amount = UserCurrency.Amount,
                 Price = UserCurrency.Price,
-                PurchaseDate = UserCurrency.PurchaseDate,
+                PurchaseDate = DateTime.Now,
                 Type = UserCurrency.Type
             });           
             await _HomeContext.SaveChangesAsync();
 
             double sumCurrency = MoneyControl.ReturnMoney(_HomeContext, UserCurrency.UserName, UserCurrency.CurrencyName);
 
+            var balance = Math.Round(user.Balance, 2);
             return Ok(new
             {
-                message = $"You get {UserCurrency.Amount} {UserCurrency.CurrencyName}\n Your new balance is {user.Balance}",
-                text= $"{UserCurrency.Amount},{UserCurrency.CurrencyName},{user.Balance},{sumCurrency}"
+                message = $"You get {UserCurrency.Amount} {UserCurrency.CurrencyName}\n Your new balance is {Math.Round(user.Balance, 2)}",
+                text= $"{balance},{sumCurrency}"
             });
         }
 
@@ -134,16 +136,17 @@ namespace CurrencyBank.Controllers
                 CurrencyName = UserCurrency.CurrencyName,
                 Amount = UserCurrency.Amount,
                 Price = UserCurrency.Price,
-                PurchaseDate = UserCurrency.PurchaseDate,
+                PurchaseDate = DateTime.Now,
                 Type = UserCurrency.Type
             });
             await _HomeContext.SaveChangesAsync();
 
+            var balance = Math.Round(user.Balance, 2);
             double sumCurrencyAfter = MoneyControl.ReturnMoney(_HomeContext, UserCurrency.UserName, UserCurrency.CurrencyName);
             return Ok(new
             {
-                message = $"You sale {UserCurrency.Amount} {UserCurrency.CurrencyName}\n Your new balance is {user.Balance}",
-                text = $"{UserCurrency.Amount},{UserCurrency.CurrencyName},{user.Balance},{sumCurrencyAfter}"
+                message = $"You sale {UserCurrency.Amount} {UserCurrency.CurrencyName}\n Your new balance is {Math.Round(user.Balance, 2)}",
+                text = $"{balance},{sumCurrencyAfter}"
             });
         }
     }
