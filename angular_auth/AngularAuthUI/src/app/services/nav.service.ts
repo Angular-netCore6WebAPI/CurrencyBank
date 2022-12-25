@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class NavService {
-  baseUrl: string = 'https://localhost:7164/Home';
+  baseUrl: string = 'https://localhost:7164/';
   constructor(private http: HttpClient) {}
 
   home(userName: string) {
-    return this.http.get<any>(`${this.baseUrl}/home?Username=${userName}`);
+    return this.http.get<any>(`${this.baseUrl}Home?Username=${userName}`);
   }
   profile(userName: string) {
-    return this.http.get<any>(`${this.baseUrl}/profile?Username=${userName}`);
+    return this.http.get<any>(`${this.baseUrl}Profile?Username=${userName}`);
   }
 }
