@@ -12,6 +12,10 @@ import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { NavComponent } from './components/nav/nav.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,9 @@ import { AdminComponent } from './components/admin/admin.component';
     HomeComponent,
     ForgotPasswordComponent,
     AdminComponent,
+    ProfileComponent,
+    AboutUsComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +41,7 @@ import { AdminComponent } from './components/admin/admin.component';
       progressAnimation: 'increasing',
     }),
     MatCardModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

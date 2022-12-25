@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  ControlContainer,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { Currencies } from 'src/app/classes/currencies';
 import { User } from 'src/app/classes/user';
 import { UserCurrency } from 'src/app/classes/user-currency';
 import ValidateForm from 'src/app/helpers/validateform';
 import { HomeService } from 'src/app/services/home.service';
+import { NavService } from 'src/app/services/nav.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -27,6 +23,7 @@ export class HomeComponent implements OnInit {
 
   hm = new User();
   userCurrency = new UserCurrency();
+  user = new User();
 
   homeBuyForm!: FormGroup;
   homeSellForm!: FormGroup;
@@ -35,24 +32,18 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private home: HomeService,
+    private nav: NavService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private shared: SharedService
+    private shared: SharedService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.hm = this.shared.get();
-
-    this.homeBuyForm = this.fb.group({
-      buyAmount: ['', Validators.min(1)],
-    });
-    this.homeSellForm = this.fb.group({
-      sellAmount: ['', Validators.min(1)],
-    });
-
     this.currency.name = 'US DOLLAR';
     this.userCurrency.currencyName = 'US DOLLAR';
-    this.home.home(this.hm.userName).subscribe({
+    this.nav.home(this.hm.userName).subscribe({
       next: (res) => {
         this.splitted(res.text);
       },
@@ -61,8 +52,15 @@ export class HomeComponent implements OnInit {
         console.log(err);
       },
     });
-  }
 
+    this.homeBuyForm = this.fb.group({
+      buyAmount: ['', Validators.min(1)],
+    });
+
+    this.homeSellForm = this.fb.group({
+      sellAmount: ['', Validators.min(1)],
+    });
+  }
   splitted(text: string) {
     var splitted = text.split(',', 4);
     this.currency.purchase = +splitted[0];
@@ -70,14 +68,12 @@ export class HomeComponent implements OnInit {
     this.hm.balance = +splitted[2];
     this.sumMoney = +splitted[3];
   }
-
   userCurrenySplitted(text: string) {
     var splitted = text.split(',', 3);
     this.currency.purchase = +splitted[0];
     this.currency.sale = +splitted[1];
     this.sumMoney = +splitted[2];
   }
-
   showMoneyType(moneyType: string) {
     this.homeBuyForm.reset();
     this.homeSellForm.reset();
@@ -95,13 +91,11 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-
   purchaseSplitted(text: string) {
-    var splitted = text.split(',', 4);
+    var splitted = text.split(',', 2);
     this.hm.balance = +splitted[0];
     this.sumMoney = +splitted[1];
   }
-
   purchase() {
     if (this.homeBuyForm.valid) {
       //Send the obj to database
@@ -109,8 +103,6 @@ export class HomeComponent implements OnInit {
       this.userCurrency.price = this.currency.purchase;
       this.userCurrency.amount = this.homeBuyForm.value.buyAmount;
       this.userCurrency.type = 'Purchase';
-
-      console.log(this.userCurrency);
 
       this.home.purchase(this.userCurrency).subscribe({
         next: (res) => {
@@ -129,7 +121,6 @@ export class HomeComponent implements OnInit {
       ValidateForm.validateAllFormFields(this.homeBuyForm);
     }
   }
-
   sale() {
     if (this.homeSellForm.valid) {
       //Send the obj to database
@@ -137,7 +128,6 @@ export class HomeComponent implements OnInit {
       this.userCurrency.price = this.currency.sale;
       this.userCurrency.amount = this.homeSellForm.value.sellAmount;
       this.userCurrency.type = 'Sale';
-      console.log(this.userCurrency);
 
       this.home.sale(this.userCurrency).subscribe({
         next: (res) => {

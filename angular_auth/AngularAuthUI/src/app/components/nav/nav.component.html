@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="padding-left: 40px; color: white"
+      >Currency Bank</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" (click)="goNav('home')">
+          <a
+            id="home"
+            class="nav-link active"
+            style="padding-left: 40px; color: white; cursor: pointer"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item" (click)="goNav('profile')">
+          <a
+            class="nav-link"
+            style="padding-left: 40px; color: white; cursor: pointer"
+            >{{ user.userName }}'s Profile</a
+          >
+        </li>
+        <li class="nav-item" (click)="goNav('about-us')">
+          <a
+            class="nav-link"
+            style="padding-left: 40px; color: white; cursor: pointer"
+            >About Us</a
+          >
+        </li>
+        <li class="nav-item" (click)="goNav('login')">
+          <a
+            class="nav-link"
+            style="padding-left: 40px; color: white; cursor: pointer"
+            >Exit</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
