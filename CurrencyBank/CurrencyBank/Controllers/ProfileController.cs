@@ -38,7 +38,7 @@ namespace CurrencyBank.Controllers
 
             return Ok(new
             {
-                text = $"{user.FirstName},{user.LastName},{user.Email}"
+                text = $"{user.FirstName},{user.LastName},{user.Email},{user.Password},{user.Balance},{user.Address},{user.PhoneNumber}"
             });
         }
 
