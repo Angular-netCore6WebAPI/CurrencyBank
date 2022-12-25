@@ -38,29 +38,57 @@
                   </li>
 
                   <div class="form-group pt-1">
-                    <div class="input-field">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        profileForm.controls['password'].dirty &&
+                        profileForm.hasError('required', 'password')
+                      "
+                    >
                       <span class="fa fa-lock p-2"></span>
                       <input
                         formControlName="password"
                         [type]="type"
-                        placeholder="Password"
+                        placeholder="{{ user.password }}"
                       />
                       <span
                         (click)="hideShowPass()"
                         class="fa {{ eyeIcon }}"
                       ></span>
                     </div>
+                    <small
+                      *ngIf="
+                        profileForm.controls['password'].dirty &&
+                        profileForm.hasError('required', 'password')
+                      "
+                      class="text-danger"
+                      >*Password is required
+                    </small>
                   </div>
                 </ul>
                 <div class="form-group pt-1">
-                  <div class="input-field">
+                  <div
+                    class="input-field"
+                    [class.error]="
+                      profileForm.controls['balance'].dirty &&
+                      profileForm.hasError('required', 'balance')
+                    "
+                  >
                     <mat-icon>attach_money</mat-icon>
                     <input
                       formControlName="balance"
                       type="number"
-                      placeholder="Balance"
+                      placeholder="{{ user.balance }}"
                     />
                   </div>
+                  <small
+                    *ngIf="
+                      profileForm.controls['balance'].dirty &&
+                      profileForm.hasError('required', 'balance')
+                    "
+                    class="text-danger"
+                    >*Balance is required
+                  </small>
                 </div>
                 <div class="form-group pt-1">
                   <div class="input-field">
@@ -68,7 +96,7 @@
                     <input
                       formControlName="address"
                       type="text"
-                      placeholder="Address"
+                      placeholder="{{ user.address }}"
                     />
                   </div>
                 </div>
@@ -77,12 +105,13 @@
                     <mat-icon>phone</mat-icon>
                     <input
                       formControlName="phoneNumber"
-                      type="number"
-                      placeholder="Phone Number"
+                      type="text"
+                      placeholder="{{ user.phoneNumber }}"
                     />
                   </div>
                 </div>
                 <button
+                  (click)="changeProfile()"
                   type="submit"
                   class="btn btn-success btn-block mt-4 w-100"
                 >

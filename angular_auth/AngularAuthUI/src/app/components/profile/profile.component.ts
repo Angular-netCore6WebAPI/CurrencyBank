@@ -42,17 +42,21 @@ export class ProfileComponent implements OnInit {
     });
 
     this.profileForm = this.fb.group({
-      password: [''],
-      balance: ['', Validators.min(1)],
-      address: [''],
-      phoneNumber: ['', Validators.min(1)],
+      password: [this.user.password, Validators.required],
+      balance: [this.user.balance, Validators.email],
+      address: [this.user.address],
+      phoneNumber: [this.user.phoneNumber],
     });
   }
   splitted(text: string) {
-    var splitted = text.split(',', 3);
+    var splitted = text.split(',', 7);
     this.user.firstName = splitted[0];
     this.user.lastName = splitted[1];
     this.user.email = splitted[2];
+    this.user.password = splitted[3];
+    this.user.balance = +splitted[4];
+    this.user.address = splitted[5];
+    this.user.phoneNumber = splitted[6];
   }
   hideShowPass() {
     this.istext = !this.istext;
@@ -62,6 +66,7 @@ export class ProfileComponent implements OnInit {
   changeProfile() {
     if (this.profileForm.valid) {
       //Send the obj to database
+
       this.user.password = this.profileForm.value.password;
       this.user.balance = this.profileForm.value.balance;
       this.user.address = this.profileForm.value.address;
@@ -70,7 +75,6 @@ export class ProfileComponent implements OnInit {
       this.profile.profile(this.user).subscribe({
         next: (res) => {
           this.toastr.success(res.message, 'SUCCESS');
-          this.splitted(res.text);
         },
         error: (err) => {
           this.toastr.warning("Currency info can't accessibly now.", 'WARNING');

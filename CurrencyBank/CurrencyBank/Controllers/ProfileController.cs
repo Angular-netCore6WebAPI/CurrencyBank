@@ -62,7 +62,7 @@ namespace CurrencyBank.Controllers
                 });
             }
 
-            if (User.Password != null)
+            if (User.Password != null || User.Password != "")
             {
                 user.Password = User.Password;
             }
@@ -70,11 +70,11 @@ namespace CurrencyBank.Controllers
             {
                 user.Balance = User.Balance;
             }
-            if (User.Address != null)
+            if (User.Address != "")
             {
                 user.Address = User.Address;
             }
-            if (User.PhoneNumber != null)
+            if (User.PhoneNumber != "")
             {
                 user.PhoneNumber = User.PhoneNumber;
             }

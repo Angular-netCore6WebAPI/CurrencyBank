@@ -6,6 +6,6 @@ export class User {
   email: string = '';
   role: string = '';
   address: string = '';
-  phoneNumber: number = 0;
+  phoneNumber: string = '';
   balance: number = 0.0;
 }
