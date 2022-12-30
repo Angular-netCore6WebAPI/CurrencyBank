@@ -6,6 +6,19 @@
   text-align: center;
   margin-bottom: 10px;
 }
+.black {
+  color: black;
+}
+.borderNone {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 80%;
+}
+.title {
+  padding-top: 10px;
+  margin: 0px;
+}
 #forget {
   min-width: 100px;
   margin-left: auto;
@@ -32,6 +45,7 @@ a:hover {
   box-shadow: 0px 0px 30px black;
   border-radius: 12px;
   margin-top: 100px;
+  background-color: white;
 }
 .input-field {
   border-radius: 5px;
@@ -65,4 +79,55 @@ img {
   object-fit: cover;
   border-radius: 50%;
   position: relative;
+}
+.field {
+  margin-top: 4px;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  color: #4343ff;
+}
+.leftColumn {
+  float: left;
+  width: 30%;
+}
+.rightColumn {
+  float: left;
+  width: 70%;
+}
+.column {
+  min-height: 60vh;
+  background-color: #ddd;
+  padding-top: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  text-align: center;
+  float: left;
+  width: 50%;
+}
+.list-group-item {
+  cursor: pointer;
+}
+.input {
+  border-radius: 10px;
+}
+.outermostBox {
+  margin: 30px;
+  padding: 20px;
+  background-color: white;
+  min-height: 80vh;
+  box-shadow: 0px 0px 30px black;
+  border-radius: 5px;
+}
+.balance {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: rgb(69, 116, 247);
+  box-shadow: 0px 0px 10px black;
+  min-height: 10vh;
+  font-weight: bold;
+  text-align: center;
 }

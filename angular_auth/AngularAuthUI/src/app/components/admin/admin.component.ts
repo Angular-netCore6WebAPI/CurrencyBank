@@ -5,6 +5,7 @@ import { User } from 'src/app/classes/user';
 import { AdminService } from 'src/app/services/admin.service';
 import { SharedService } from 'src/app/services/shared.service';
 import ValidateForm from 'src/app/helpers/validateform';
+import { UserType } from 'src/app/classes/user-type';
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +17,9 @@ export class AdminComponent implements OnInit {
 
   adm = new User();
   user = new User();
+
+  userType!: UserType[];
+  typeSelected: Number = 0;
 
   value1: String = '';
   value2: String = '';
@@ -65,12 +69,14 @@ export class AdminComponent implements OnInit {
   }
 
   roleControl(role: string) {
+    this.userType = [
+      { Id: 1, Type: 'User' },
+      { Id: 2, Type: 'Admin' },
+    ];
     if (role == 'User') {
-      this.value1 = 'User';
-      this.value2 = 'Admin';
+      this.typeSelected = 1;
     } else if (role == 'Admin') {
-      this.value1 = 'Admin';
-      this.value2 = 'User';
+      this.typeSelected = 2;
     }
   }
 
@@ -78,9 +84,10 @@ export class AdminComponent implements OnInit {
     if (this.adminForm.valid) {
       //Send the obj to database
       this.user.userName = this.adminForm.value.username;
-      this.user.role = (<HTMLSelectElement>(
-        document.getElementById('roles')
-      )).value;
+      this.user.role =
+        (<HTMLSelectElement>document.getElementById('roles')).value == '1'
+          ? 'User'
+          : 'Admin';
       this.admin.changeRole(this.user).subscribe({
         next: (res) => {
           this.toastr.success(res.message, 'SUCCESS');

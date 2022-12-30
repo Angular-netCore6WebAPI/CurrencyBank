@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
 
     this.profileForm = this.fb.group({
       password: [this.user.password, Validators.required],
-      balance: [this.user.balance, Validators.email],
+      balance: [this.user.balance, Validators.required],
       address: [this.user.address],
       phoneNumber: [this.user.phoneNumber],
     });

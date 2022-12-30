@@ -2,18 +2,18 @@
   <div class="container">
     <div class="row">
       <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
-        <div class="panel border bg-white">
+        <div class="panel">
           <div class="panel-heading">
-            <h5 class="font-weight-bold" style="padding-top: 10px; margin: 0px">
+            <h5 class="title">
               {{ adm.userName }}
             </h5>
-            <h3 class="font-weight-bold" style="padding-top: 10px">
-              Admin Panel
-            </h3>
+            <h3 class="title">Admin Panel</h3>
           </div>
-          <div class="panel-body p-3">
+          <div class="p-3">
             <form [formGroup]="adminForm">
-              <p>Enter the username of the user you want to query</p>
+              <p class="title">
+                Enter the username of the user you want to query
+              </p>
 
               <div class="form-group pt-3">
                 <div
@@ -50,35 +50,37 @@
 
               <div class="form-group pt-3">
                 <ul>
-                  <li class="input-field mt-2">
+                  <li class="field">
                     <span class="fa fa-user p-2"></span
-                    ><label style="color: black"
+                    ><label class="black"
                       >Firstname : {{ user.firstName }}</label
                     >
                   </li>
-                  <li class="input-field mt-2">
+                  <li class="field">
                     <span class="fa fa-user p-2"></span
-                    ><label style="color: black"
-                      >Lastname : {{ user.lastName }}</label
-                    >
+                    ><label class="black">Lastname : {{ user.lastName }}</label>
                   </li>
-                  <li class="input-field mt-2">
+                  <li class="field">
                     <span class="fa fa-user p-2"></span
-                    ><label style="color: black"
-                      >Username : {{ user.userName }}</label
-                    >
+                    ><label class="black">Username : {{ user.userName }}</label>
                   </li>
-                  <li class="input-field mt-2">
+                  <li class="field">
                     <span class="fa fa-user p-2"></span>
-                    <label style="color: black">Role : </label>
+                    <label class="black">Role : </label>
                     <select
-                      style="border: none; outline: none; width: 80%"
-                      name="roles"
-                      id="roles"
+                      class="borderNone"
                       type="text"
+                      id="roles"
+                      [(ngModel)]="typeSelected"
+                      [ngModelOptions]="{ standalone: true }"
                     >
-                      <option value="User" type="text">{{ value1 }}</option>
-                      <option value="Admin" type="text">{{ value2 }}</option>
+                      <option
+                        type="text"
+                        *ngFor="let type of userType"
+                        [value]="type.Id"
+                      >
+                        {{ type.Type }}
+                      </option>
                     </select>
                   </li>
                 </ul>
